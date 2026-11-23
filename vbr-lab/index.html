@@ -74,16 +74,6 @@
           <p>The simulator is plain JavaScript with no dependencies. It has unit tests, including the CBR sanity check above. <a href="https://github.com/mkhan-harvard/mkhan-harvard.github.io/blob/main/assets/sim.js">Read the code on GitHub</a>.</p>
         </div>
       </section>
-
-      <section class="block" aria-labelledby="built-title">
-        <h2 id="built-title">How I built it</h2>
-        <div class="prose">
-          <p>I built VBR Lab with an AI coding assistant writing most of the code, which is how I work on most projects now. What I’m accountable for is understanding it and knowing which results to trust, so the checks are on this page: a CBR control that should show almost no benefit, a 50-run average next to every single run, and unit tests for the download model, the VBR cap, and the buffer-based player.</p>
-          <p>One result looks like a bug and isn’t. Under CBR, the fight-night and talk-show results come out identical. Without VBR, scene content never reaches the segment sizes, so the event can’t matter. That’s the model behaving exactly as designed.</p>
-          <p>The buffer-based player is there for the same reason as the CBR control. Judging the size-aware player only against the nominal one would let the comparison grade itself. A published design from outside the project gives it something independent to be measured against.</p>
-        </div>
-      </section>
-
       
     </main>
     <footer id="contact" class="title-block">
