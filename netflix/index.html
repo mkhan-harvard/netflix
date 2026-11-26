@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Muhammed Khan for Netflix: a live player that reads the next few seconds</title>
-  <meta name="description" content="An interactive simulator of segment-size-aware adaptive bitrate for live VBR streaming, built by Muhammed Khan.">
+  <title>Why Netflix, by Muhammed Khan</title>
+  <meta name="description" content="Why I want to help build Netflix: a short story in six scenes, by Muhammed Khan.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0e0c0a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='3' fill='%230e0c0a'/><rect x='9' y='4' width='14' height='24' fill='%23f2b13a'/><g fill='%230e0c0a'><rect x='4' y='6' width='3' height='4'/><rect x='4' y='14' width='3' height='4'/><rect x='4' y='22' width='3' height='4'/><rect x='25' y='6' width='3' height='4'/><rect x='25' y='14' width='3' height='4'/><rect x='25' y='22' width='3' height='4'/></g></svg>">
@@ -20,72 +20,7 @@
   </header>
 
     <main>
-      <div class="hero hero-lab">
-        <div class="title-card">
-          <p class="kicker">VBR Lab</p>
-          <h1>A live player that reads the next few seconds</h1>
-        </div>
-        <p class="lead">In April, Netflix’s live streaming team wrote that every Live event now uses capped VBR, and that they’re testing whether devices can choose streams using the actual sizes of upcoming segments instead of nominal bitrates. I built a simulator to see what that buys a player, and what it costs.</p>
-        <p class="aside">I’m a Harvard engineering student applying for the Software Engineer Intern role, Summer 2027. Source post: <a href="https://netflixtechblog.com/smarter-live-streaming-at-scale-rolling-out-vbr-for-all-netflix-live-events-c8f833b238cc">Smarter Live Streaming at Scale</a> (Netflix TechBlog, April 2026).</p>
-      </div>
-
-      <section class="block" aria-labelledby="lab-title">
-        <h2 id="lab-title">Try it</h2>
-        <div class="prose">
-          <p>Two simulated players watch the same live event over the same network. They use the same decision rule. The only difference is what each one believes the next segments will cost: the nominal bitrate on the label, or the real size the server has already published.</p>
-          <p>A third player, drawn dashed, is a reference from published research: the buffer-based design from Netflix and Stanford’s 2014 paper <a href="https://web.stanford.edu/class/cs244/papers/sigcomm2014-video.pdf">“A Buffer-Based Approach to Rate Adaptation”</a>. It ignores throughput and picks bitrate from buffer level alone. Change the event, the network, or the encoding, and all three rerun.</p>
-        </div>
-        <div class="lab" id="lab"><p class="muted">The simulator needs JavaScript to run.</p></div>
-      </section>
-
-      <section class="block" aria-labelledby="found-title">
-        <h2 id="found-title">What I found</h2>
-        <div class="prose">
-          <p>With CBR, the two players are nearly identical. That’s the sanity check: when the label matches reality, knowing the real size adds nothing. Flip the encoding to CBR in the simulator to see it.</p>
-          <p>With capped VBR on a volatile phone connection, the size-aware player rebuffers less. It sees an expensive scene, like a fight starting or confetti falling, in segments that are already published, and steps down before the spike drains its buffer. The nominal player only finds out after the download is slow.</p>
-          <p>On steady Wi-Fi neither player stalls. There the size-aware player mostly saves data, at a small cost in quality, because it stops reaching for a top rung whose real segments have become expensive. It isn’t free, though: it switches bitrate more often, since real segment sizes jump from scene to scene. A production version would need to weigh smoothness, which my rule only handles crudely.</p>
-          <p>The buffer-based player draws a sharp line between the two networks. On steady Wi-Fi it’s the best of the three: the highest quality, the fewest switches, and no stalls. On busy evening Wi-Fi it still has the highest quality and almost no stalls, though it uses roughly 15 to 25 percent more data. On a phone connection it reaches about 7 to 9 points higher quality but stalls three to six times as long. The paper’s buffers were four minutes long. Live allows about 8 seconds, so by the time the buffer reveals a slowdown, there’s little left to spend. In this model, that’s the case for looking ahead at what’s coming instead of waiting for the buffer to fall.</p>
-        </div>
-        <div class="findings" id="findings"></div>
-      </section>
-
-      <section class="block" aria-labelledby="how-title">
-        <h2 id="how-title">How it works</h2>
-        <div class="prose">
-          <h3>A control problem</h3>
-          <p>I study mechanical engineering, so I read adaptive bitrate as a feedback controller. The buffer is the state. Network throughput is a noisy disturbance. The rung you pick each segment is the control input, and a stall is the failure you’re designing against. VBR adds a second disturbance the player can partly see in advance: how expensive the content is about to be.</p>
-
-          <h3>The stream</h3>
-          <p>A six-rung ladder from 400 kbps to 8 Mbps, cut into 2-second segments. Each event is a sequence of scenes with a compression difficulty, from a static waiting room to confetti. Under capped VBR, a segment’s real size follows that difficulty and is capped at 1.6 times nominal, with higher rungs swinging more. Under CBR it stays within 10% of nominal.</p>
-
-          <h3>The player</h3>
-          <p>It joins four segments behind the live edge and can’t download a segment before it exists, which keeps the buffer short, as it is in real live playback. Playback starts after two segments. Throughput is estimated as the harmonic mean of the last five downloads, so one fast download can’t inflate it.</p>
-
-          <h3>The shared decision rule</h3>
-          <p>For each rung from the top down, the player plays the next three segments forward at 90% of estimated throughput and picks the highest rung that keeps the buffer above 2.5 seconds. It steps up at most one rung at a time, and only with 2 extra seconds of margin. The nominal player prices each segment at its label. The size-aware player uses the real size of every segment already published, and for segments past the live edge it assumes the latest real-to-nominal ratio, never less than nominal.</p>
-
-          <h3>The buffer-based reference player</h3>
-          <p>This is BBA-0 from the paper. At or below 2 seconds of buffer (one segment), it takes the lowest rung; from 7 seconds up, the highest. In between, a straight line maps buffer level to a target rate, and the player moves only when that target crosses the next rung up or down, which keeps it from flickering. The paper used a 240-second buffer and reached the top rung at 90% full. These thresholds were set the same way from the 8-second live cap, not tuned on results.</p>
-          <h3>What this leaves out</h3>
-          <p>The numbers are illustrative, not Netflix data. The quality score is a stand-in tied to each rung, not VMAF. Network traces are synthetic. It models one viewer, not the server side, so it ignores Netflix’s other next step: reserving server capacity with a discount informed by real VBR behavior. It also assumes the server can tell the player the sizes of segments it has already encoded.</p>
-
-          <h3>What I’d do next</h3>
-          <p>Replace synthetic scenes with real per-segment sizes from an open VBR encode, score quality with Netflix’s open-source VMAF, and add a server with many viewers to explore the capacity-reservation question. I’d also add the paper’s BBA-1, which handles variable bitrate by mapping buffer level to upcoming segment sizes instead of nominal rates. It’s a buffer-based version of the same idea the size-aware player tests.</p>
-
-          <p>The simulator is plain JavaScript with no dependencies. It has unit tests, including the CBR sanity check above. <a href="https://github.com/mkhan-harvard/mkhan-harvard.github.io/blob/main/assets/sim.js">Read the code on GitHub</a>.</p>
-        </div>
-      </section>
-
-      <section class="block" aria-labelledby="built-title">
-        <h2 id="built-title">How I built it</h2>
-        <div class="prose">
-          <p>I built VBR Lab with an AI coding assistant writing most of the code, which is how I work on most projects now. What I’m accountable for is understanding it and knowing which results to trust, so the checks are on this page: a CBR control that should show almost no benefit, a 50-run average next to every single run, and unit tests for the download model, the VBR cap, and the buffer-based player.</p>
-          <p>One result looks like a bug and isn’t. Under CBR, the fight-night and talk-show results come out identical. Without VBR, scene content never reaches the segment sizes, so the event can’t matter. That’s the model behaving exactly as designed.</p>
-          <p>The buffer-based player is there for the same reason as the CBR control. Judging the size-aware player only against the nominal one would let the comparison grade itself. A published design from outside the project gives it something independent to be measured against.</p>
-        </div>
-      </section>
-
-      <section class="story" id="why" aria-labelledby="why-title" data-scene="0">
+      <section class="story story-first" id="why" aria-labelledby="why-title" data-scene="0">
         <div class="stage" aria-hidden="true">
           <div class="bg bg-0"></div>
           <div class="bg bg-1"><span class="tv-gap"></span><span class="lamp"></span></div>
@@ -99,11 +34,11 @@
         </div>
         <div class="steps">
           <div class="step step-title" data-scene="0"><div class="step-card">
-            <h2 id="why-title">Why Netflix</h2>
-            <p>The short version is the lab above. The long version starts in a house with no TV.</p>
+            <h1 id="why-title">Why Netflix</h1>
+            <p>I’m Muhammed, a Harvard engineering student applying to be a Software Engineer Intern, Summer 2027. It starts in a house with no TV.</p>
             <p class="hint" aria-hidden="true">Scroll</p>
           </div></div>
-          <div class="step" data-scene="1"><div class="step-card"><p class="ch">01 / 06</p><h3>A house with no TV</h3><p>Growing up, we never had a TV, and I wasn’t allowed to go to the movie theater. I was told there were too many bad things in movies. I loved film and television anyway.</p></div></div><div class="step" data-scene="2"><div class="step-card"><p class="ch">02 / 06</p><h3>A dusty old computer</h3><p>I watched whatever I could find on YouTube on our dusty old computer, lived for the days teachers put on a movie, made my own stop-motion films, and ran around dressed as a superhero making up stories.</p></div></div><div class="step" data-scene="3"><div class="step-card"><p class="ch">03 / 06</p><h3>My first movie theater</h3><p>When I was old enough to decide for myself, I saw my first movie in a theater: <em>Spider-Man: No Way Home</em>. I still remember how transformed I felt walking out.</p></div></div><div class="step" data-scene="4"><div class="step-card"><p class="ch">04 / 06</p><h3>My own account</h3><p>When I started earning my own money, I bought my own Netflix subscription. That endless list of movies and shows was overwhelming in the best way.</p></div></div><div class="step" data-scene="5"><div class="step-card"><p class="ch">05 / 06</p><h3>Then, the stage</h3><p>Film stayed my favorite way to learn. I even wrote my college essay about it. In college, facing what I wanted my future to look like, I realized my whole life had been pointing to this field. I started acting and was cast as a lead in a short film and a play. Now when I watch something, I think about everything that went into making it.</p></div></div><div class="step" data-scene="6"><div class="step-card"><p class="ch">06 / 06</p><h3>The part nobody sees</h3><p>That’s part of why I built VBR Lab. Streaming is the piece of the magic most viewers never see, the engineering that makes a show start instantly and never stall, and it’s the piece I want to help build.</p><p class="closer">Netflix gave me an outlet early in my life. Being part of making that magic for others would be an incredible honor.</p></div></div>
+          <div class="step" data-scene="1"><div class="step-card"><p class="ch">01 / 06</p><h3>A house with no TV</h3><p>Growing up, we never had a TV, and I wasn’t allowed to go to the movie theater. I was told there were too many bad things in movies. I loved film and television anyway.</p></div></div><div class="step" data-scene="2"><div class="step-card"><p class="ch">02 / 06</p><h3>A dusty old computer</h3><p>I watched whatever I could find on YouTube on our dusty old computer, lived for the days teachers put on a movie, made my own stop-motion films, and ran around dressed as a superhero making up stories.</p></div></div><div class="step" data-scene="3"><div class="step-card"><p class="ch">03 / 06</p><h3>My first movie theater</h3><p>When I was old enough to decide for myself, I saw my first movie in a theater: <em>Spider-Man: No Way Home</em>. I still remember how transformed I felt walking out.</p></div></div><div class="step" data-scene="4"><div class="step-card"><p class="ch">04 / 06</p><h3>My own account</h3><p>When I started earning my own money, I bought my own Netflix subscription. That endless list of movies and shows was overwhelming in the best way.</p></div></div><div class="step" data-scene="5"><div class="step-card"><p class="ch">05 / 06</p><h3>Then, the stage</h3><p>Film stayed my favorite way to learn. I even wrote my college essay about it. In college, facing what I wanted my future to look like, I realized my whole life had been pointing to this field. I started acting and was cast as a lead in a short film and a play. Now when I watch something, I think about everything that went into making it.</p></div></div><div class="step" data-scene="6"><div class="step-card"><p class="ch">06 / 06</p><h3>The part nobody sees</h3><p>That’s part of why I built <a href="../vbr-lab/">VBR Lab</a>. Streaming is the piece of the magic most viewers never see, the engineering that makes a show start instantly and never stall, and it’s the piece I want to help build.</p><p class="closer">Netflix gave me an outlet early in my life. Being part of making that magic for others would be an incredible honor.</p></div></div>
         </div>
       </section>
     </main>
@@ -117,10 +52,9 @@
         <a href="https://www.linkedin.com/in/muhammed-khan-9b3566326">LinkedIn</a>
         <a href="../resume.pdf">Résumé (PDF)</a></dd></div>
     </dl>
-    <p class="fine">An independent project, not affiliated with or endorsed by Netflix. All simulator data is synthetic.</p>
+    <p class="fine">Not affiliated with or endorsed by Netflix.</p>
   </footer>
 </div>
-<script type="module" src="../assets/lab.js"></script>
 <script type="module" src="../assets/script.js"></script>
 </body>
 </html>
