@@ -6,25 +6,25 @@
   <title>Muhammed Khan for Netflix: a live player that reads the next few seconds</title>
   <meta name="description" content="An interactive simulator of segment-size-aware adaptive bitrate for live VBR streaming, built by Muhammed Khan.">
   <meta name="robots" content="noindex">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='3' width='26' height='26' fill='none' stroke='%231d2a5e' stroke-width='3'/><path d='M3 22h26M18 22v7' stroke='%231d2a5e' stroke-width='2'/></svg>">
-  <link rel="preload" href="../assets/fonts/b612-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="theme-color" content="#0e0c0a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='3' fill='%230e0c0a'/><rect x='9' y='4' width='14' height='24' fill='%23f2b13a'/><g fill='%230e0c0a'><rect x='4' y='6' width='3' height='4'/><rect x='4' y='14' width='3' height='4'/><rect x='4' y='22' width='3' height='4'/><rect x='25' y='6' width='3' height='4'/><rect x='25' y='14' width='3' height='4'/><rect x='25' y='22' width='3' height='4'/></g></svg>">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fontsource/big-shoulders-display@5.3.0/files/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../assets/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<div class="sheet">
-  <div class="zones zones-top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
-  <div class="zones zones-bottom" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
-  <div class="zones zones-left" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
-  <div class="zones zones-right" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
-  <div class="sheet-inner">
-    <header class="sheet-head">
-      <a class="name" href=".././">Muhammed Khan</a>
-      <nav aria-label="Site"><a href=".././#work">Work</a><a href="../vbr-lab/" aria-current="page">VBR Lab</a><a href="../resume.pdf">Résumé</a><a href="#contact">Contact</a></nav>
-    </header>
+<div class="film">
+  <header class="site-head">
+    <a class="name" href=".././">Muhammed Khan</a>
+    <nav aria-label="Site"><a href=".././#work">Work</a><a href="../vbr-lab/" aria-current="page">VBR Lab</a><a href="../resume.pdf">Résumé</a><a href="#contact">Contact</a></nav>
+  </header>
 
     <main>
       <div class="hero hero-lab">
-        <h1>A live player that reads the next few seconds</h1>
+        <div class="title-card">
+          <p class="kicker">VBR Lab</p>
+          <h1>A live player that reads the next few seconds</h1>
+        </div>
         <p class="lead">In April, Netflix’s live streaming team wrote that every Live event now uses capped VBR, and that they’re testing whether devices can choose streams using the actual sizes of upcoming segments instead of nominal bitrates. I built a simulator to see what that buys a player, and what it costs.</p>
         <p class="aside">I’m a Harvard engineering student applying for the Software Engineer Intern role, Summer 2027. Source post: <a href="https://netflixtechblog.com/smarter-live-streaming-at-scale-rolling-out-vbr-for-all-netflix-live-events-c8f833b238cc">Smarter Live Streaming at Scale</a> (Netflix TechBlog, April 2026).</p>
       </div>
@@ -85,31 +85,42 @@
         </div>
       </section>
 
-      <section class="block" aria-labelledby="why-title">
-        <h2 id="why-title">Why Netflix</h2>
-        <div class="prose">
-          
-          <p>Growing up, we never had a TV, and I wasn’t allowed to go to the movie theater. I was told there were too many bad things in movies. I loved film and television anyway. I watched whatever I could find on YouTube on our dusty old computer, lived for the days teachers put on a movie, made my own stop-motion films, and ran around dressed as a superhero making up stories. When I was old enough to decide for myself, I saw my first movie in a theater: <em>Spider-Man: No Way Home</em>. I still remember how transformed I felt walking out.</p><p>When I started earning my own money, I bought my own Netflix subscription. That endless list of movies and shows was overwhelming in the best way.</p><p>Film stayed my favorite way to learn. I even wrote my college essay about it. In college, facing what I wanted my future to look like, I realized my whole life had been pointing to this field. I started acting and was cast as a lead in a short film and a play. Now when I watch something, I think about everything that went into making it.</p><p>That’s part of why I built VBR Lab. Streaming is the piece of the magic most viewers never see, the engineering that makes a show start instantly and never stall, and it’s the piece I want to help build. Netflix gave me an outlet early in my life. Being part of making that magic for others would be an incredible honor.</p>
-          
+      <section class="story" id="why" aria-labelledby="why-title" data-scene="0">
+        <div class="stage" aria-hidden="true">
+          <div class="bg bg-0"></div>
+          <div class="bg bg-1"><span class="tv-gap"></span><span class="lamp"></span></div>
+          <div class="bg bg-2"><span class="crt"></span><span class="dust"></span></div>
+          <div class="bg bg-3"><span class="screen"></span><span class="seats"></span></div>
+          <div class="bg bg-4"><div class="wall"><i style="--h:28;--l:34%"></i><i style="--h:95;--l:47%"></i><i style="--h:135;--l:38%"></i><i style="--h:190;--l:51%"></i><i style="--h:55;--l:42%"></i><i style="--h:265;--l:55%"></i><i style="--h:175;--l:46%"></i><i style="--h:200;--l:37%"></i><i style="--h:215;--l:50%"></i><i style="--h:225;--l:41%"></i><i style="--h:330;--l:54%"></i><i style="--h:300;--l:45%"></i><i style="--h:40;--l:36%"></i><i style="--h:245;--l:49%"></i><i style="--h:160;--l:40%"></i><i style="--h:15;--l:53%"></i><i style="--h:28;--l:44%"></i><i style="--h:95;--l:35%"></i><i style="--h:135;--l:48%"></i><i style="--h:190;--l:39%"></i><i style="--h:55;--l:52%"></i><i style="--h:265;--l:43%"></i><i style="--h:175;--l:34%"></i><i style="--h:200;--l:47%"></i><i style="--h:215;--l:38%"></i><i style="--h:225;--l:51%"></i><i style="--h:330;--l:42%"></i><i style="--h:300;--l:55%"></i><i style="--h:40;--l:46%"></i><i style="--h:245;--l:37%"></i><i style="--h:160;--l:50%"></i><i style="--h:15;--l:41%"></i><i style="--h:28;--l:54%"></i><i style="--h:95;--l:45%"></i><i style="--h:135;--l:36%"></i><i style="--h:190;--l:49%"></i><i style="--h:55;--l:40%"></i><i style="--h:265;--l:53%"></i><i style="--h:175;--l:44%"></i><i style="--h:200;--l:35%"></i><i style="--h:215;--l:48%"></i><i style="--h:225;--l:39%"></i><i style="--h:330;--l:52%"></i><i style="--h:300;--l:43%"></i><i style="--h:40;--l:34%"></i><i style="--h:245;--l:47%"></i><i style="--h:160;--l:38%"></i><i style="--h:15;--l:51%"></i><i style="--h:28;--l:42%"></i><i style="--h:95;--l:55%"></i><i style="--h:135;--l:46%"></i><i style="--h:190;--l:37%"></i><i style="--h:55;--l:50%"></i><i style="--h:265;--l:41%"></i><i style="--h:175;--l:54%"></i><i style="--h:200;--l:45%"></i><i style="--h:215;--l:36%"></i><i style="--h:225;--l:49%"></i><i style="--h:330;--l:40%"></i><i style="--h:300;--l:53%"></i></div></div>
+          <div class="bg bg-5"><span class="curtain l"></span><span class="curtain r"></span><span class="spot"></span></div>
+          <div class="bg bg-6"><svg viewBox="0 0 640 120" preserveAspectRatio="none"><path d="M0,103.7H0.0V103.7H4.9V104.7H9.8V105.5H14.8V103.0H19.7V103.0H24.6V103.2H29.5V104.1H34.5V102.9H39.4V102.4H44.3V102.9H49.2V104.6H54.2V103.7H59.1V104.4H64.0V103.3H68.9V105.5H73.8V103.0H78.8V104.0H83.7V104.2H88.6V105.1H93.5V103.1H98.5V103.4H103.4V103.2H108.3V103.2H113.2V103.6H118.2V102.3H123.1V75.5H128.0V67.1H132.9V74.1H137.8V68.8H142.8V68.2H147.7V83.8H152.6V98.0H157.5V93.3H162.5V89.6H167.4V90.1H172.3V82.7H177.2V81.5H182.2V85.3H187.1V73.8H192.0V72.6H196.9V54.3H201.8V72.0H206.8V58.9H211.7V66.2H216.6V64.1H221.5V28.3H226.5V24.4H231.4V16.5H236.3V16.5H241.2V30.1H246.2V32.7H251.1V51.2H256.0V59.4H260.9V67.4H265.8V57.0H270.8V48.2H275.7V20.1H280.6V41.4H285.5V38.7H290.5V36.8H295.4V45.2H300.3V39.9H305.2V36.9H310.2V54.7H315.1V59.3H320.0V39.0H324.9V46.8H329.8V46.1H334.8V36.4H339.7V21.5H344.6V16.5H349.5V16.5H354.5V39.2H359.4V16.5H364.3V26.4H369.2V82.6H374.2V78.5H379.1V84.0H384.0V80.3H388.9V81.3H393.8V79.2H398.8V83.5H403.7V76.9H408.6V78.8H413.5V72.8H418.5V19.4H423.4V28.5H428.3V29.5H433.2V28.1H438.2V57.6H443.1V38.9H448.0V46.6H452.9V49.6H457.8V75.1H462.8V65.1H467.7V66.0H472.6V67.2H477.5V61.4H482.5V56.1H487.4V55.2H492.3V16.5H497.2V43.7H502.2V24.4H507.1V27.2H512.0V28.0H516.9V60.5H521.8V71.8H526.8V76.8H531.7V79.0H536.6V102.8H541.5V89.7H546.5V61.2H551.4V81.2H556.3V88.9H561.2V89.4H566.2V16.5H571.1V16.5H576.0V18.2H580.9V16.5H585.8V18.6H590.8V24.4H595.7V19.7H600.6V34.4H605.5V18.6H610.5V16.5H615.4V16.5H620.3V16.5H625.2V16.5H630.2V22.7H635.1V28.3H640" pathLength="1"/></svg></div>
+          <div class="grain"></div>
+          <ol class="dots"><li></li><li></li><li></li><li></li><li></li><li></li></ol>
+        </div>
+        <div class="steps">
+          <div class="step step-title" data-scene="0"><div class="step-card">
+            <h2 id="why-title">Why Netflix</h2>
+            <p>The short version is the lab above. The long version starts in a house with no TV.</p>
+            <p class="hint" aria-hidden="true">Scroll</p>
+          </div></div>
+          <div class="step" data-scene="1"><div class="step-card"><p class="ch">01 / 06</p><h3>A house with no TV</h3><p>Growing up, we never had a TV, and I wasn’t allowed to go to the movie theater. I was told there were too many bad things in movies. I loved film and television anyway.</p></div></div><div class="step" data-scene="2"><div class="step-card"><p class="ch">02 / 06</p><h3>A dusty old computer</h3><p>I watched whatever I could find on YouTube on our dusty old computer, lived for the days teachers put on a movie, made my own stop-motion films, and ran around dressed as a superhero making up stories.</p></div></div><div class="step" data-scene="3"><div class="step-card"><p class="ch">03 / 06</p><h3>My first movie theater</h3><p>When I was old enough to decide for myself, I saw my first movie in a theater: <em>Spider-Man: No Way Home</em>. I still remember how transformed I felt walking out.</p></div></div><div class="step" data-scene="4"><div class="step-card"><p class="ch">04 / 06</p><h3>My own account</h3><p>When I started earning my own money, I bought my own Netflix subscription. That endless list of movies and shows was overwhelming in the best way.</p></div></div><div class="step" data-scene="5"><div class="step-card"><p class="ch">05 / 06</p><h3>Then, the stage</h3><p>Film stayed my favorite way to learn. I even wrote my college essay about it. In college, facing what I wanted my future to look like, I realized my whole life had been pointing to this field. I started acting and was cast as a lead in a short film and a play. Now when I watch something, I think about everything that went into making it.</p></div></div><div class="step" data-scene="6"><div class="step-card"><p class="ch">06 / 06</p><h3>The part nobody sees</h3><p>That’s part of why I built VBR Lab. Streaming is the piece of the magic most viewers never see, the engineering that makes a show start instantly and never stall, and it’s the piece I want to help build.</p><p class="closer">Netflix gave me an outlet early in my life. Being part of making that magic for others would be an incredible honor.</p></div></div>
         </div>
       </section>
     </main>
-    <footer id="contact" class="title-block has-client">
-      <div class="tb-cell tb-title"><span class="tb-label">Title</span><span class="tb-big">VBR Lab</span></div>
-      <div class="tb-cell tb-drawn"><span class="tb-label">Drawn by</span>Muhammed Khan</div>
-      <div class="tb-cell tb-school"><span class="tb-label">School</span>Harvard College, S.B. Mechanical Engineering, 2028</div>
-      <div class="tb-cell tb-sheet"><span class="tb-label">Sheet</span>2 of 2</div>
-      <div class="tb-cell tb-rev"><span class="tb-label">Rev</span>A, 17 Nov 2026</div>
-      <div class="tb-cell tb-client"><span class="tb-label">Prepared for</span>Netflix, Software Engineer Intern, Summer 2027</div>
-      <div class="tb-cell tb-contact"><span class="tb-label">Contact</span>
-        <span class="contact-line"><a href="mailto:muhammedkhan@college.harvard.edu">muhammedkhan@college.harvard.edu</a>
+  <footer id="contact" class="credits">
+    <dl>
+      <div><dt>Written, directed and engineered by</dt><dd class="big">Muhammed Khan</dd></div>
+      <div><dt>Studying</dt><dd>Mechanical Engineering, Harvard College, Class of 2028</dd></div>
+      <div><dt>Prepared for</dt><dd>Netflix, Software Engineer Intern, Summer 2027</dd></div>
+      <div><dt>Contact</dt><dd class="contact-line"><a href="mailto:muhammedkhan@college.harvard.edu">muhammedkhan@college.harvard.edu</a>
         <a href="https://github.com/mkhan-harvard">GitHub</a>
         <a href="https://www.linkedin.com/in/muhammed-khan-9b3566326">LinkedIn</a>
-        <a href="../resume.pdf">Résumé (PDF)</a></span></div>
-    </footer>
-  </div>
+        <a href="../resume.pdf">Résumé (PDF)</a></dd></div>
+    </dl>
+    <p class="fine">An independent project, not affiliated with or endorsed by Netflix. All simulator data is synthetic.</p>
+  </footer>
 </div>
-<p class="sheet-note">An independent project, not affiliated with or endorsed by Netflix. All simulator data is synthetic.</p>
-  <script type="module" src="../assets/lab.js"></script>
+<script type="module" src="../assets/lab.js"></script>
+<script type="module" src="../assets/script.js"></script>
 </body>
 </html>
