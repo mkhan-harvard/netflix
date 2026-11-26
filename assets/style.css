@@ -306,6 +306,7 @@ table.data caption { text-align: left; font-weight: 700; padding-bottom: 0.5rem;
   :root { --strip: 10px; --gutter: 1rem; }
   body::before, body::after { background-size: 6px 100%; background-image: repeating-linear-gradient(to bottom, transparent 0 6px, #2b251d 6px 12px, transparent 12px 18px); }
   .frames, .results { grid-template-columns: minmax(0, 1fr); }
+  .site-head nav { gap: 0.25rem 0.95rem; font-size: 0.8125rem; }
   .title-card { aspect-ratio: auto; padding: 3rem 1.2rem; }
   .step { padding: 14vh calc(var(--strip) + 1.1rem); align-items: flex-end; }
   .step-title { align-items: center; }
