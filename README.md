@@ -36,7 +36,7 @@ Everything is synthetic and simplified. The quality score is not VMAF, there is 
 
 ## Design
 
-Every page is a sheet in one engineering drawing set: a frame with grid zones, the same menu on every sheet, and a title block that doubles as the contact section. The typeface is B612, designed for aircraft cockpit displays.
+The site is styled like film: dark theater colors, film-strip edges, a widescreen title card on every page, projects shown as frames, and an end-credits footer that doubles as the contact section. The Netflix page ends with “Why Netflix” as a scroll story: the background stays put and changes scene as each chapter scrolls into view (`assets/script.js`). The scenes are drawn in CSS, with no images. Typefaces (SIL Open Font License, served from jsDelivr): Big Shoulders Display, Courier Prime and Instrument Sans.
 
 ## Run locally
 
@@ -56,7 +56,8 @@ vbr-lab/index.html    the lab with write-up
 netflix/index.html    lab with a note for a Netflix application (unlisted)
 assets/sim.js         simulation engine, no DOM, fully tested
 assets/lab.js         UI: controls, SVG charts, tables
-assets/style.css      shared styles: whiteprint (light) and blueprint (dark)
-assets/fonts/         B612 typeface, self-hosted (SIL Open Font License)
+assets/style.css      shared styles (film theme)
+assets/script.js      scroll story on the Netflix page
+(fonts load from jsDelivr: @fontsource packages, SIL Open Font License)
 tests/sim.test.js     unit tests
 ```

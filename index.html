@@ -5,27 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Muhammed Khan</title>
   <meta name="description" content="Harvard engineering student who builds software: mobile apps, AI tools, and simulations.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='3' width='26' height='26' fill='none' stroke='%231d2a5e' stroke-width='3'/><path d='M3 22h26M18 22v7' stroke='%231d2a5e' stroke-width='2'/></svg>">
-  <link rel="preload" href="assets/fonts/b612-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="theme-color" content="#0e0c0a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='3' fill='%230e0c0a'/><rect x='9' y='4' width='14' height='24' fill='%23f2b13a'/><g fill='%230e0c0a'><rect x='4' y='6' width='3' height='4'/><rect x='4' y='14' width='3' height='4'/><rect x='4' y='22' width='3' height='4'/><rect x='25' y='6' width='3' height='4'/><rect x='25' y='14' width='3' height='4'/><rect x='25' y='22' width='3' height='4'/></g></svg>">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fontsource/big-shoulders-display@5.3.0/files/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<div class="sheet">
-  <div class="zones zones-top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
-  <div class="zones zones-bottom" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
-  <div class="zones zones-left" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
-  <div class="zones zones-right" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
-  <div class="sheet-inner">
-    <header class="sheet-head">
-      <a class="name" href="./">Muhammed Khan</a>
-      <nav aria-label="Site"><a href="./#work" aria-current="page">Work</a><a href="vbr-lab/">VBR Lab</a><a href="resume.pdf">Résumé</a><a href="#contact">Contact</a></nav>
-    </header>
+<div class="film">
+  <header class="site-head">
+    <a class="name" href="./">Muhammed Khan</a>
+    <nav aria-label="Site"><a href="./#work" aria-current="page">Work</a><a href="vbr-lab/">VBR Lab</a><a href="resume.pdf">Résumé</a><a href="#contact">Contact</a></nav>
+  </header>
 
     <main>
       <div class="hero">
-        <div class="dim-wrap">
+        <div class="title-card">
+          <p class="kicker">A portfolio by</p>
           <h1>Muhammed Khan</h1>
-          <div class="dimension" aria-hidden="true"><span>Mechanical engineering, Harvard ’28</span></div>
+          <p class="kicker under">Mechanical engineering, Harvard ’28</p>
         </div>
         <p class="lead">I build software the way I was trained to build machines: model the system, find what it can’t see, and design for the moment it fails. Mobile apps, AI tools, and simulations of systems that have to decide with noisy information.</p>
       </div>
@@ -33,9 +31,9 @@
       <section class="block" id="work" aria-labelledby="work-title">
         <h2 id="work-title">Selected work</h2>
 
-        <article class="detail detail-featured">
-          <div class="bubble" aria-hidden="true">A</div>
-          <div class="detail-body">
+        <div class="frames">
+        <article class="frame featured" data-frame="FRAME 01">
+          <div>
             <h3>VBR Lab</h3>
             <p>A live-streaming simulator that tests whether a video player should trust a stream’s nominal bitrate or the real size of its next few segments. It started from a question Netflix’s live team raised about capped VBR, and it runs in your browser.</p>
             <figure class="mini-fig">
@@ -47,26 +45,22 @@
           </div>
         </article>
 
-        <div class="detail-pair">
-          <article class="detail">
-            <div class="bubble" aria-hidden="true">B</div>
-            <div class="detail-body">
+          <article class="frame" data-frame="FRAME 02">
+            <div>
               <h3>Flight</h3>
               <p>A 30-day social media detox app for iOS and Android, built and ready to launch.</p>
               <p class="stack">React Native, TypeScript, Expo, Supabase, RevenueCat, OneSignal</p>
             </div>
           </article>
-          <article class="detail">
-            <div class="bubble" aria-hidden="true">C</div>
-            <div class="detail-body">
+          <article class="frame" data-frame="FRAME 03">
+            <div>
               <h3>Personal AI assistant</h3>
               <p>A working voice assistant I built from scratch. The model runs in the cloud; voice, memory, and tools run locally for speed and privacy.</p>
               <p class="stack">Built on the Claude Agent SDK</p>
             </div>
           </article>
-          <article class="detail">
-            <div class="bubble" aria-hidden="true">D</div>
-            <div class="detail-body">
+          <article class="frame" data-frame="FRAME 04">
+            <div>
               <h3>Boom arm for film sets <span class="status">In progress</span></h3>
               <p>My final project for Fundamentals of Engineering Design (ES&nbsp;55): a physical prototype that takes the weight off film-set boom operators, who hold a microphone boom overhead through long takes.</p>
               <p class="stack">Mechanical design and prototyping, Harvard ES&nbsp;55</p>
@@ -92,25 +86,22 @@
       </section>
 
       <section class="block notes" aria-labelledby="notes-title">
-        <h2 id="notes-title">Notes</h2>
-        <p>Off the drawing board, I act and am working toward professional screen work, and I train in Kali, a Filipino martial art.</p>
+        <h2 id="notes-title">Off camera</h2>
+        <p>I act, and I’m working toward professional screen work. I also train in Kali, a Filipino martial art.</p>
       </section>
     </main>
-    <footer id="contact" class="title-block">
-      <div class="tb-cell tb-title"><span class="tb-label">Title</span><span class="tb-big">Portfolio</span></div>
-      <div class="tb-cell tb-drawn"><span class="tb-label">Drawn by</span>Muhammed Khan</div>
-      <div class="tb-cell tb-school"><span class="tb-label">School</span>Harvard College, S.B. Mechanical Engineering, 2028</div>
-      <div class="tb-cell tb-sheet"><span class="tb-label">Sheet</span>1 of 2</div>
-      <div class="tb-cell tb-rev"><span class="tb-label">Rev</span>A, 17 Nov 2026</div>
+  <footer id="contact" class="credits">
+    <dl>
+      <div><dt>Written, directed and engineered by</dt><dd class="big">Muhammed Khan</dd></div>
+      <div><dt>Studying</dt><dd>Mechanical Engineering, Harvard College, Class of 2028</dd></div>
       
-      <div class="tb-cell tb-contact"><span class="tb-label">Contact</span>
-        <span class="contact-line"><a href="mailto:muhammedkhan@college.harvard.edu">muhammedkhan@college.harvard.edu</a>
+      <div><dt>Contact</dt><dd class="contact-line"><a href="mailto:muhammedkhan@college.harvard.edu">muhammedkhan@college.harvard.edu</a>
         <a href="https://github.com/mkhan-harvard">GitHub</a>
         <a href="https://www.linkedin.com/in/muhammed-khan-9b3566326">LinkedIn</a>
-        <a href="resume.pdf">Résumé (PDF)</a></span></div>
-    </footer>
-  </div>
+        <a href="resume.pdf">Résumé (PDF)</a></dd></div>
+    </dl>
+    <p class="fine">All projects built by Muhammed Khan.</p>
+  </footer>
 </div>
-<p class="sheet-note">All projects drawn and built by Muhammed Khan.</p>
 </body>
 </html>
