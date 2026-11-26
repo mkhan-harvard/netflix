@@ -162,6 +162,7 @@ table.ledger td:nth-child(2) { width: 30%; }
 
 /* ---------- Why Netflix: a scroll story. The stage sticks; each chapter swaps the scene behind it. ---------- */
 html, body { overflow-x: clip; }
+.story-first { margin-top: 0 !important; }
 .story { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-top: clamp(3rem, 6vw, 4.5rem); background: #000; }
 .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .steps { position: relative; margin-top: -100vh; margin-top: -100svh; }
@@ -175,9 +176,9 @@ html, body { overflow-x: clip; }
 .step-title .step-card { background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; max-width: 40rem; }
 .step-card p { margin: 0 0 0.9rem; } .step-card p:last-child { margin-bottom: 0; }
 .step-card .ch { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 0.4rem; }
-.step-card h3, .step-title h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; line-height: 0.95; margin: 0 0 1rem; }
+.step-card h3, .step-title h2, .step-title h1 { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; line-height: 0.95; margin: 0 0 1rem; }
 .step-card h3 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); }
-.step-title h2 { font-size: clamp(3.6rem, 11vw, 8rem); margin-bottom: 1.2rem; }
+.step-title h2, .step-title h1 { font-size: clamp(3.6rem, 11vw, 8rem); margin-bottom: 1.2rem; }
 .step-title p { color: var(--ink-2); font-size: clamp(1.1rem, 2vw, 1.35rem); }
 .step-card .closer { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.15; color: var(--accent); margin-top: 1.2rem; }
 .hint { font-family: var(--mono); font-size: 0.75rem !important; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 2.5rem !important; }
